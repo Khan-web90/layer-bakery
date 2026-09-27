@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Layers Bakery & Deli — Amsterdam</title>
+  <meta name="description" content="Layers is a modern bakery, café and deli in Amsterdam. Freshly baked laminated pastries, specialty coffee and slow mornings made for good company." />
+
+  <!-- Favicon: @layers.bkry profile pic, circular -->
+  <link rel="icon" type="image/jpeg" href="https://scontent.cdninstagram.com/v/t51.75761-19/504821520_17864207196421954_3702335237007887605_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=111&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JtSxEmjAKy0Q7kNvwG-fM98&_nc_oc=Adr8ukdNXVhWDCTpza2XYRQPwMczBouqQ8uaPUp2_mF4LAYxQ30deozKXY8i7PwuDFY&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=fsP3yvKBrXuryVavnccQ-w&_nc_ss=7ba8c&oh=00_AQL6AW0DWBX5Zl0iWGO6j8HFg6AUDS--HgMS78SBUPtAnw&oe=6ABE8120" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__mark">
+        <span class="loader__brand">LAYERS</span>
+        <span class="loader__sub">Bakery &amp; Deli · Amsterdam</span>
+      </div>
+      <div class="loader__bar"><span class="loader__fill"></span></div>
+    </div>
+  </div>
+
+  <!-- ============ CUSTOM CURSOR ============ -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
+    <div class="cursor__label" id="cursorLabel"><span></span></div>
+  </div>
+
+  <!-- ============ PAGE TRANSITION OVERLAY ============ -->
+  <div class="transition" id="transition" aria-hidden="true">
+    <div class="transition__panel"></div>
+    <div class="transition__panel"></div>
+    <div class="transition__panel"></div>
+    <div class="transition__panel"></div>
+    <div class="transition__mark">LAYERS</div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo" data-cursor="link" aria-label="Layers — Home">
+        <img class="nav__logo-img" src="https://scontent.cdninstagram.com/v/t51.75761-19/504821520_17864207196421954_3702335237007887605_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=111&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JtSxEmjAKy0Q7kNvwG-fM98&_nc_oc=Adr8ukdNXVhWDCTpza2XYRQPwMczBouqQ8uaPUp2_mF4LAYxQ30deozKXY8i7PwuDFY&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=fsP3yvKBrXuryVavnccQ-w&_nc_ss=7ba8c&oh=00_AQL6AW0DWBX5Zl0iWGO6j8HFg6AUDS--HgMS78SBUPtAnw&oe=6ABE8120" alt="Layers" />
+      </a>
+
+      <nav class="nav__menu" aria-label="Primary">
+        <ul>
+          <li><a href="#home" class="nav__link is-active" data-cursor="link">Home</a></li>
+          <li><a href="#menu" class="nav__link" data-cursor="link">Menu</a></li>
+          <li><a href="#about" class="nav__link" data-cursor="link">About</a></li>
+          <li><a href="#bakery" class="nav__link" data-cursor="link">Bakery</a></li>
+          <li><a href="#deli" class="nav__link" data-cursor="link">Deli</a></li>
+          <li><a href="#contact" class="nav__link" data-cursor="link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a href="#order" class="nav__cta" data-cursor="cta">
+        <span>Order Online</span>
+        <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+
+      <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__inner">
+      <ul>
+        <li><a href="#home" data-menu-link>Home</a></li>
+        <li><a href="#menu" data-menu-link>Menu</a></li>
+        <li><a href="#about" data-menu-link>About</a></li>
+        <li><a href="#bakery" data-menu-link>Bakery</a></li>
+        <li><a href="#deli" data-menu-link>Deli</a></li>
+        <li><a href="#contact" data-menu-link>Contact</a></li>
+      </ul>
+      <a href="#order" class="mobile-menu__cta" data-menu-link>
+        <span>Order Online</span>
+        <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <main id="home">
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__group">
+          <span>Baked with attitude</span><span class="marquee__star">★</span>
+          <span>Layers Bakery &amp; Deli</span><span class="marquee__star">★</span>
+          <span>Fresh out the oven</span><span class="marquee__star">★</span>
+          <span>Open every day · 09–18</span><span class="marquee__star">★</span>
+          <span>Baked with attitude</span><span class="marquee__star">★</span>
+          <span>Layers Bakery &amp; Deli</span><span class="marquee__star">★</span>
+          <span>Fresh out the oven</span><span class="marquee__star">★</span>
+          <span>Open every day · 09–18</span><span class="marquee__star">★</span>
+        </span>
+        <span class="marquee__group" aria-hidden="true">
+          <span>Baked with attitude</span><span class="marquee__star">★</span>
+          <span>Layers Bakery &amp; Deli</span><span class="marquee__star">★</span>
+          <span>Fresh out the oven</span><span class="marquee__star">★</span>
+          <span>Open every day · 09–18</span><span class="marquee__star">★</span>
+          <span>Baked with attitude</span><span class="marquee__star">★</span>
+          <span>Layers Bakery &amp; Deli</span><span class="marquee__star">★</span>
+          <span>Fresh out the oven</span><span class="marquee__star">★</span>
+          <span>Open every day · 09–18</span><span class="marquee__star">★</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" data-section="hero">
+      <div class="hero__bg" id="heroBg">
+        <div class="hero__bg-img" data-parallax="hero-img"></div>
+        <div class="hero__bg-grain"></div>
+        <div class="hero__bg-overlay"></div>
+      </div>
+
+      <div class="hero__content">
+        <div class="hero__left">
+          <span class="hero__eyebrow"><span class="hero__eyebrow-dot"></span>Baked fresh in Amsterdam · Open every day</span>
+          <h1 class="hero__title">
+            <span class="hero__line"><span>Layers</span></span>
+            <span class="hero__line"><span class="hero__title-amp">Bakery &amp;</span> <span>Deli</span></span>
+          </h1>
+          <p class="hero__lede">A bakery and deli in Amsterdam. Freshly baked, carefully layered — made for slow mornings and good company.</p>
+          <div class="hero__cta">
+            <a href="#menu" class="btn btn--primary" data-cursor="cta">
+              <span>Explore the Menu</span>
+              <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            </a>
+            <a href="#visit" class="btn btn--ghost" data-cursor="cta">
+              <span>Visit Us</span>
+              <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll" id="heroScroll">
+        <span>Scroll to discover</span>
+        <div class="hero__scroll-arrow">
+          <svg viewBox="0 0 12 24" width="10" height="20" aria-hidden="true"><path d="M6 0v22M1 17l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PHILOSOPHY ============ -->
+    <section class="philosophy" data-section="philosophy">
+      <div class="container">
+        <div class="philosophy__grid">
+          <div class="philosophy__label">
+            <span class="eyebrow"><span class="eyebrow__num">01</span> Our philosophy</span>
+          </div>
+          <div class="philosophy__copy">
+            <h2 class="display">
+              Layers of craft, flavour and <em>everyday ritual.</em>
+            </h2>
+            <p class="lede">
+              Layers is a bakery and deli focused on freshly baked goods, specialty coffee,
+              laminated pastries, slow-fermented breads, cakes and carefully prepared food.
+              We believe a good morning starts with a good croissant — and a good croissant
+              starts the night before.
+            </p>
+          </div>
+          <div class="philosophy__mark" aria-hidden="true">
+            <span>L / B / D</span>
+            <span class="philosophy__year">EST. 24</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CRAFT / IMAGE + TEXT ============ -->
+    <section class="craft" data-section="craft">
+      <div class="container">
+        <div class="craft__grid">
+          <div class="craft__media reveal-clip">
+            <div class="craft__img" data-parallax="craft-img"></div>
+            <span class="craft__caption">Hands at work — 06:14, Amsterdam.</span>
+          </div>
+
+          <div class="craft__copy">
+            <span class="eyebrow"><span class="eyebrow__num">02</span> The craft</span>
+            <h2 class="display">
+              Made slowly.<br/><em>Served simply.</em>
+            </h2>
+            <p>
+              Every loaf, every pastry, every plate starts with time. Doughs ferment for
+              thirty-six hours. Coffee is roasted a few streets away. Produce arrives from
+              growers we know by name. Nothing here is hurried — and you can taste it.
+            </p>
+            <p>
+              We work in layers. A laminated croissant has twenty-seven. A sandwich is built
+              one decision at a time. It's how we think about every part of the day, from
+              your first flat white to a long, easy lunch.
+            </p>
+
+            <a href="#about" class="link-arrow" data-cursor="link">
+              <span>Our story</span>
+              <svg viewBox="0 0 24 10" width="24" height="10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SIGNATURE / CARDS ============ -->
+    <section class="signature" id="bakery" data-section="signature">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow"><span class="eyebrow__num">03</span> From the kitchen</span>
+            <h2 class="display">Fresh from the Layers kitchen.</h2>
+          </div>
+          <p class="section-head__sub">
+            Our favourites, baked and prepared throughout the day —
+            in three small chapters.
+          </p>
+        </header>
+
+        <div class="cards">
+          <article class="card" data-card="01" data-cursor="card">
+            <div class="card__media">
+              <div class="card__img card__img--01"></div>
+              <div class="card__overlay"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__num">01 — 03</span>
+              <h3 class="card__title">Laminated pastries</h3>
+              <p class="card__desc">
+                Twenty-seven layers of butter, folded by hand. Almond, chocolate, cardamom —
+                shaped every morning before the city wakes.
+              </p>
+              <span class="card__cta">
+                <span>View selection</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </span>
+            </div>
+          </article>
+
+          <article class="card" data-card="02" data-cursor="card">
+            <div class="card__media">
+              <div class="card__img card__img--02"></div>
+              <div class="card__overlay"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__num">02 — 03</span>
+              <h3 class="card__title">Freshly baked</h3>
+              <p class="card__desc">
+                Slow-fermented sourdough, brioche, milk buns and seasonal focaccia.
+                Out of the oven and onto the counter, all day long.
+              </p>
+              <span class="card__cta">
+                <span>View selection</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </span>
+            </div>
+          </article>
+
+          <article class="card" data-card="03" data-cursor="card">
+            <div class="card__media">
+              <div class="card__img card__img--03"></div>
+              <div class="card__overlay"></div>
+            </div>
+            <div class="card__body">
+              <span class="card__num">03 — 03</span>
+              <h3 class="card__title">Deli favourites</h3>
+              <p class="card__desc">
+                Sandwiches, salads, slow-cooked meats and seasonal plates.
+                A neighbourhood menu that changes with the week.
+              </p>
+              <span class="card__cta">
+                <span>View selection</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENU ============ -->
+    <section class="menu" id="menu" data-section="menu">
+      <div class="container">
+        <header class="menu__head">
+          <div>
+            <span class="eyebrow"><span class="eyebrow__num">04</span> The menu</span>
+            <h2 class="display">A short, considered menu.</h2>
+          </div>
+          <p class="menu__sub">
+            Six categories. Written like a printed menu —
+            because some things are better read slowly.
+          </p>
+        </header>
+
+        <div class="menu__layout">
+          <nav class="menu__tabs" role="tablist" aria-label="Menu categories">
+            <button class="menu__tab is-active" role="tab" data-tab="bakery" aria-selected="true">Bakery</button>
+            <button class="menu__tab" role="tab" data-tab="pastries" aria-selected="false">Pastries</button>
+            <button class="menu__tab" role="tab" data-tab="cakes" aria-selected="false">Cakes</button>
+            <button class="menu__tab" role="tab" data-tab="coffee" aria-selected="false">Coffee</button>
+            <button class="menu__tab" role="tab" data-tab="deli" aria-selected="false">Deli</button>
+            <button class="menu__tab" role="tab" data-tab="drinks" aria-selected="false">Drinks</button>
+          </nav>
+
+          <div class="menu__panel" id="menuPanel">
+
+            <!-- BAKERY -->
+            <div class="menu__group is-active" data-group="bakery">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Country sourdough</h4>
+                  <p>36-hour fermented, blistered crust, soft open crumb.</p>
+                </div>
+                <span class="menu__row-price">€6.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Seeded rye</h4>
+                  <p>Caraway, sunflower, linseed — dense, nutty, slow baked.</p>
+                </div>
+                <span class="menu__row-price">€7.00</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Milk bun</h4>
+                  <p>Soft enriched bun, brushed with milk — for sandwiches and butter.</p>
+                </div>
+                <span class="menu__row-price">€3.20</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Olive &amp; rosemary focaccia</h4>
+                  <p>Long ferment, Sicilian sea salt, cold-pressed olive oil.</p>
+                </div>
+                <span class="menu__row-price">€5.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Walnut &amp; raisin loaf</h4>
+                  <p>Whole wheat, malted barley, soaked raisins, toasted walnuts.</p>
+                </div>
+                <span class="menu__row-price">€6.80</span>
+              </div>
+            </div>
+
+            <!-- PASTRIES -->
+            <div class="menu__group" data-group="pastries">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Almond croissant</h4>
+                  <p>Laminated pastry, almond cream, toasted flaked almonds.</p>
+                </div>
+                <span class="menu__row-price">€4.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Pain au chocolat</h4>
+                  <p>Dark chocolate folded through classic laminated dough.</p>
+                </div>
+                <span class="menu__row-price">€4.00</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Cardamom bun</h4>
+                  <p>Buttery laminated dough, cardamom sugar, pearl sugar finish.</p>
+                </div>
+                <span class="menu__row-price">€4.25</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Lemon &amp; poppy twist</h4>
+                  <p>Soft enriched dough, lemon curd, poppy, vanilla glaze.</p>
+                </div>
+                <span class="menu__row-price">€4.00</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Savoury ham &amp; gruyère</h4>
+                  <p>Brioche-style dough, aged gruyère, slow-cooked ham.</p>
+                </div>
+                <span class="menu__row-price">€4.75</span>
+              </div>
+            </div>
+
+            <!-- CAKES -->
+            <div class="menu__group" data-group="cakes">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Brown butter Basque</h4>
+                  <p>Caramelised top, soft set centre, Maldon salt.</p>
+                </div>
+                <span class="menu__row-price">€5.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Lemon &amp; olive oil cake</h4>
+                  <p>Sicilian lemons, cold-pressed oil, mascarpone cream.</p>
+                </div>
+                <span class="menu__row-price">€5.00</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Dark chocolate tart</h4>
+                  <p>Single-origin 72%, sablé breton, crème fraîche.</p>
+                </div>
+                <span class="menu__row-price">€5.75</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Carrot &amp; walnut</h4>
+                </div>
+                <span class="menu__row-price">€5.25</span>
+              </div>
+            </div>
+
+            <!-- COFFEE -->
+            <div class="menu__group" data-group="coffee">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Espresso</h4>
+                  <p>Single origin, rotated seasonally.</p>
+                </div>
+                <span class="menu__row-price">€2.80</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Flat white</h4>
+                  <p>Double ristretto, textured jersey milk.</p>
+                </div>
+                <span class="menu__row-price">€3.60</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Pour over</h4>
+                  <p>Hand-brewed to order. Filter, batch, or single origin.</p>
+                </div>
+                <span class="menu__row-price">€4.25</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Cortado</h4>
+                  <p>Espresso, lightly steamed milk, short and balanced.</p>
+                </div>
+                <span class="menu__row-price">€3.40</span>
+              </div>
+            </div>
+
+            <!-- DELI -->
+            <div class="menu__group" data-group="deli">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Layers club</h4>
+                  <p>Roast chicken, bacon, avocado, soft herbs, sourdough.</p>
+                </div>
+                <span class="menu__row-price">€12.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Slow beef &amp; gruyère</h4>
+                  <p>12-hour brisket, melted gruyère, pickled onion, jus.</p>
+                </div>
+                <span class="menu__row-price">€13.00</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Roast veg &amp; whipped feta</h4>
+                  <p>Seasonal roots, charred, whipped feta, seeded granola.</p>
+                </div>
+                <span class="menu__row-price">€11.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Bowl of the day</h4>
+                  <p>Ask the counter — built around what's freshest.</p>
+                </div>
+                <span class="menu__row-price">€12.00</span>
+              </div>
+            </div>
+
+            <!-- DRINKS -->
+            <div class="menu__group" data-group="drinks">
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>House lemonade</h4>
+                  <p>Citrus, thyme, light honey. Made in-house, daily.</p>
+                </div>
+                <span class="menu__row-price">€4.25</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Sparkling tonics</h4>
+                  <p>House-blended. Fig &amp; rosemary, or grapefruit &amp; sea.</p>
+                </div>
+                <span class="menu__row-price">€4.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Loose leaf tea</h4>
+                  <p>Earl grey, jasmine, fresh mint, or the day's blend.</p>
+                </div>
+                <span class="menu__row-price">€3.50</span>
+              </div>
+              <div class="menu__row">
+                <div class="menu__row-main">
+                  <h4>Hot chocolate</h4>
+                  <p>Single-origin dark, sea salt, steamed milk.</p>
+                </div>
+                <span class="menu__row-price">€4.25</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="menu__foot">
+          <span class="menu__note">Prices are indicative. Allergens available on request.</span>
+          <a href="#order" class="link-arrow" data-cursor="link">
+            <span>Order online</span>
+            <svg viewBox="0 0 24 10" width="24" height="10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LARGE IMAGE BREAK ============ -->
+    <section class="break" data-section="break">
+      <div class="break__bg">
+        <div class="break__img" data-parallax="break-img"></div>
+        <div class="break__overlay"></div>
+      </div>
+      <div class="break__content">
+        <span class="eyebrow eyebrow--light"><span class="eyebrow__num">05</span> In the room</span>
+        <h2 class="display display--xl">
+          <span>Baked in Amsterdam.</span>
+          <em>Made for the everyday.</em>
+        </h2>
+        <span class="break__caption">Layers · Centrum &amp; West · since twenty-twenty-four</span>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" data-section="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__copy">
+            <span class="eyebrow"><span class="eyebrow__num">06</span> About Layers</span>
+            <h2 class="display">More than a <em>bakery.</em></h2>
+            <p class="lede">
+              Layers brings together the craft of a bakery, the ease of a neighbourhood
+              café and the energy of a deli. A place to start the morning, take a break,
+              and stay a while.
+            </p>
+          </div>
+
+          <ul class="about__list">
+            <li class="about__item" data-reveal="about-item">
+              <span class="about__item-num">01</span>
+              <div>
+                <h4>Baked daily</h4>
+                <p>Pastries out of the oven from 07:30. Bread all morning. Cakes all day.</p>
+              </div>
+            </li>
+            <li class="about__item" data-reveal="about-item">
+              <span class="about__item-num">02</span>
+              <div>
+                <h4>Good coffee</h4>
+                <p>Roasted locally, brewed with care. Filter, espresso, or batch.</p>
+              </div>
+            </li>
+            <li class="about__item" data-reveal="about-item">
+              <span class="about__item-num">03</span>
+              <div>
+                <h4>Local energy</h4>
+                <p>A small, considered space in the heart of Amsterdam — built for the neighbourhood.</p>
+              </div>
+            </li>
+            <li class="about__item" data-reveal="about-item">
+              <span class="about__item-num">04</span>
+              <div>
+                <h4>Slow food</h4>
+                <p>Made in-house, from scratch, with growers and roasters we know by name.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="testimonials" data-section="testimonials">
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <span class="eyebrow"><span class="eyebrow__num">07</span> What people say</span>
+            <h2 class="display">A few kind words.</h2>
+          </div>
+          <div class="testimonials__nav" aria-label="Testimonial navigation">
+            <button class="t-nav t-nav--prev" id="tPrev" aria-label="Previous" data-cursor="cta">
+              <svg viewBox="0 0 24 10" width="24" height="10" aria-hidden="true"><path d="M24 5H2M6 1L2 5l4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            </button>
+            <button class="t-nav t-nav--next" id="tNext" aria-label="Next" data-cursor="cta">
+              <svg viewBox="0 0 24 10" width="24" height="10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="t-track" id="tTrack">
+          <article class="t-card">
+            <span class="t-card__mark" aria-hidden="true">“</span>
+            <p class="t-card__quote">Beautiful pastries, incredible coffee and one of those places you immediately want to return to. It feels like an editorial spread you can sit inside.</p>
+            <span class="t-card__cite">— Local Guide</span>
+          </article>
+          <article class="t-card">
+            <span class="t-card__mark" aria-hidden="true">“</span>
+            <p class="t-card__quote">The almond croissant is the one. Twenty-seven layers, apparently — and you can taste every single one. Worth getting up early for.</p>
+            <span class="t-card__cite">— Anne, Amsterdam</span>
+          </article>
+          <article class="t-card">
+            <span class="t-card__mark" aria-hidden="true">“</span>
+            <p class="t-card__quote">A bakery that takes its time. The room is calm, the music is right, the staff actually care. Layers just gets it.</p>
+            <span class="t-card__cite">— @eetsmakelijk</span>
+          </article>
+          <article class="t-card">
+            <span class="t-card__mark" aria-hidden="true">“</span>
+            <p class="t-card__quote">Somewhere between a deli and a gallery. The food is precise, the coffee is serious, and the whole place feels quietly confident.</p>
+            <span class="t-card__cite">— De Foodredactie</span>
+          </article>
+        </div>
+
+        <div class="t-dots" id="tDots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ VISIT / LOCATION ============ -->
+    <section class="visit" id="contact" data-section="visit">
+      <div class="container">
+        <div class="visit__grid">
+
+          <div class="visit__copy">
+            <span class="eyebrow"><span class="eyebrow__num">08</span> Come by</span>
+            <h2 class="display">Drop in. <em>Stay a while.</em></h2>
+            <p class="lede">
+              We're a few minutes from Centrum and right at home in West.
+              Coffee's on, the oven's warm.
+            </p>
+
+            <div class="visit__details">
+              <div class="visit__col">
+                <span class="visit__label">Locations</span>
+                <p>
+                  <strong>Saenredamstraat 32</strong><br/>
+                  <span class="visit__addr-meta">1072 CH Amsterdam</span><br/>
+                  <span class="visit__addr-tag">Bakery &amp; Deli</span>
+                </p>
+                <p>
+                  <strong>Spui 28</strong><br/>
+                  <span class="visit__addr-meta">1012 XA Amsterdam</span><br/>
+                  <span class="visit__addr-tag">Bakery</span>
+                </p>
+              </div>
+              <div class="visit__col">
+                <span class="visit__label">Hours</span>
+                <p>
+                  <strong>Open every day</strong><br/>
+                  Bakery · 09:00 — 18:00<br/>
+                  Deli · 12:00 — 17:30
+                </p>
+                <p class="visit__small">From early bread to a slow lunch.</p>
+              </div>
+              <div class="visit__col">
+                <span class="visit__label">Contact</span>
+                <p>
+                  <a href="mailto:hello@layers.bkry" class="link-underline">hello@layers.bkry</a><br/>
+                  <a href="tel:+31201234567" class="link-underline">+31 20 123 45 67</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="visit__cta">
+              <a href="https://www.google.com/maps/search/?api=1&query=Saenredamstraat+32,+Amsterdam" target="_blank" rel="noopener" class="btn btn--primary" data-cursor="cta">
+                <span>Get directions</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </a>
+              <a href="mailto:hello@layers.bkry" class="btn btn--ghost" data-cursor="cta">
+                <span>Contact us</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <aside class="visit__map" aria-label="Map of Layers Bakery &amp; Deli">
+            <div class="map">
+              <iframe
+                class="map__iframe"
+                src="https://maps.google.com/maps?q=Saenredamstraat+32,+1072+CH+Amsterdam&t=m&z=15&ie=UTF8&iwloc=&output=embed"
+                title="Layers Bakery &amp; Deli — Saenredamstraat 32, Amsterdam"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+              <div class="map__vignette" aria-hidden="true"></div>
+              <div class="map__chip">
+                <span class="map__chip-dot" aria-hidden="true"></span>
+                <span class="map__chip-text">
+                  <span class="map__chip-label">Saenredamstraat 32</span>
+                  <span class="map__chip-sub">1072 CH · Amsterdam</span>
+                </span>
+              </div>
+              <a class="map__cta" href="https://www.google.com/maps/search/?api=1&query=Saenredamstraat+32,+Amsterdam" target="_blank" rel="noopener" data-cursor="cta" aria-label="Open in Google Maps">
+                <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M9 2h5v5M14 2L7 9M11 9v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Open in Google Maps</span>
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer" id="order">
+      <div class="container">
+
+        <div class="footer__top">
+          <div class="footer__brand">
+            <span class="footer__logo">Layers</span>
+            <p>Freshly baked and brewed in Amsterdam. A bakery, café and deli for the everyday.</p>
+            <p class="footer__address">Saenredamstraat 32, 1072 CH Amsterdam<br/>Spui 28, 1012 XA Amsterdam</p>
+          </div>
+
+          <form class="footer__news" data-reveal="news" onsubmit="event.preventDefault();">
+            <span class="eyebrow"><span class="eyebrow__num">↗</span> Stay in the loop</span>
+            <h4 class="footer__news-title">Letters from the bakery, every other Sunday.</h4>
+            <div class="footer__news-row">
+              <input type="email" placeholder="Your email" aria-label="Email" required />
+              <button type="submit" data-cursor="cta">
+                <span>Subscribe</span>
+                <svg viewBox="0 0 14 10" width="14" height="10" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </button>
+            </div>
+            <span class="footer__news-note">No spam. Only fresh things.</span>
+          </form>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <span class="footer__label">Sitemap</span>
+            <ul>
+              <li><a href="#home" data-cursor="link">Home</a></li>
+              <li><a href="#menu" data-cursor="link">Menu</a></li>
+              <li><a href="#about" data-cursor="link">About</a></li>
+              <li><a href="#bakery" data-cursor="link">Bakery</a></li>
+              <li><a href="#deli" data-cursor="link">Deli</a></li>
+              <li><a href="#contact" data-cursor="link">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <span class="footer__label">Hours</span>
+            <p>
+              <strong>Open every day</strong><br/>
+              Bakery · 09:00 — 18:00<br/>
+              Deli · 12:00 — 17:30
+            </p>
+            <p class="footer__small">From early bread to a slow lunch.</p>
+          </div>
+          <div class="footer__col footer__col--social">
+            <span class="footer__label">Follow</span>
+            <a href="https://www.instagram.com/layers.bkry" target="_blank" rel="noopener" class="footer__ig" data-cursor="cta" aria-label="Follow Layers on Instagram">
+              <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+                <defs>
+                  <linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#feda75"/>
+                    <stop offset="35%" stop-color="#fa7e1e"/>
+                    <stop offset="60%" stop-color="#d62976"/>
+                    <stop offset="100%" stop-color="#962fbf"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="28" height="28" rx="7" fill="url(#igGrad)"/>
+                <circle cx="16" cy="16" r="6.5" fill="none" stroke="#fff" stroke-width="2.2"/>
+                <circle cx="23" cy="9" r="1.6" fill="#fff"/>
+              </svg>
+              <span class="footer__ig-text">
+                <span class="footer__ig-handle">@layers.bkry</span>
+                <span class="footer__ig-follow">Follow on Instagram ↗</span>
+              </span>
+            </a>
+          </div>
+          <div class="footer__col">
+            <span class="footer__label">Press</span>
+            <ul>
+              <li><a href="mailto:press@layers.bkry" class="link-underline" data-cursor="link">press@layers.bkry</a></li>
+              <li><a href="mailto:hello@layers.bkry" class="link-underline" data-cursor="link">hello@layers.bkry</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>© Layers Bakery &amp; Deli · 2024 — <span id="year"></span></span>
+          <span class="footer__bottom-mid">Baked in Amsterdam with care.</span>
+          <a href="#" class="footer__top-link" data-cursor="link">
+            <span>Back to top</span>
+            <svg viewBox="0 0 12 24" width="10" height="20" aria-hidden="true"><path d="M6 24V2M1 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+          </a>
+        </div>
+
+        <div class="footer__endmark" aria-hidden="true">
+          <span class="footer__endmark-rule"></span>
+          <span class="footer__endmark-name">Layers</span>
+          <span class="footer__endmark-tag">Bakery &amp; Deli · Amsterdam · MMXXIV</span>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
